@@ -15,7 +15,8 @@ import core.Game;
 
 public class Play extends BasicGameState{
 
-	boolean[][] data = {{true,false,false,true},{false,false,false,false},{false,false,false,true},{true,true,false,true},{true,false,false,true},{true,false,false,true},{false,false,false,false},{true,true,true,true}};
+	int [] intarray = {0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,2,2,2,2,2,2,4,4,4,4,4,4};
+	//boolean[][] data = {{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true}};
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -27,12 +28,32 @@ public class Play extends BasicGameState{
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		
+		boolean key = false;
+		/*
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
 				if (data[i][j]) {
-					g.fillRect(100 + i * 80, 100 + j * 80 + currentTick * 80, 40, 40);
+					g.fillRect(100 + j * 80, 100 + i * 80 + currentTick * 80, 40, 40);
 				}
+			}
+		}
+		*/
+		for (int i = 0; i < intarray.length; i++) {
+			if (intarray[i] == 1 && key == true)
+			{
+				
+			}
+			else if (intarray[i]==2)
+			{
+				
+			}
+			else if (intarray[i]==3)
+			{
+				
+			}
+			else if (intarray[i]==4)
+			{
+				
 			}
 		}
 	}
@@ -49,9 +70,9 @@ public class Play extends BasicGameState{
 		
 		deltaSum += delta;
 		
-		if(start && deltaSum >= 1000)
+		if(start && deltaSum >= 500)
 		{
-			deltaSum -= 1000;
+			deltaSum -= 500;
 			currentTick++;
 		}
 	}
