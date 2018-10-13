@@ -16,7 +16,7 @@ import core.Game;
 public class Play extends BasicGameState {
 
 	//int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2,4,3,2,4,1,3,2,4,0,3,2,0,2,1,2,3,0,0,1,2,3,0 };
-	int[] data = {1,2};
+	int[] data = {1,1,1,1};
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -28,6 +28,7 @@ public class Play extends BasicGameState {
 	int x4 = 1259;
 	int iconSize = 222;
 	Image i1, i2, i3, i4;
+	int score = 0;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -46,7 +47,6 @@ public class Play extends BasicGameState {
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-		int score = 0;
 		int counter = 0;
 		for (int i = 0; i < data.length; i++) {
 			counter = 0;
@@ -86,7 +86,7 @@ public class Play extends BasicGameState {
 				if (x == 466 && (y>=hitY-20 && y <=hitY+iconSize+20))
 				{
 					scorecheck = true;
-					System.out.println(y);
+					//System.out.println(y);
 					System.out.println("yo");
 				}
 				//System.out.println(hitY);
@@ -117,6 +117,7 @@ public class Play extends BasicGameState {
 			if (scorecheck == true)
 			{
 				score += 20;
+				System.out.println("hi");
 			}
 		}
 		System.out.println(score);
