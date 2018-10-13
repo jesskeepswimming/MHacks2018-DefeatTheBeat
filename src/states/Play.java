@@ -15,7 +15,8 @@ import core.Game;
 
 public class Play extends BasicGameState {
 
-	int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2,4,3,2,4,1,3,2,4,0,3,2,0,2,1,2,3,0,0,1,2,3,0 };
+	//int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2,4,3,2,4,1,3,2,4,0,3,2,0,2,1,2,3,0,0,1,2,3,0 };
+	int[] data = {1,2};
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -45,10 +46,10 @@ public class Play extends BasicGameState {
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-
-		int length = data.length * iconSize;
-
+		int score = 0;
+		int counter = 0;
 		for (int i = 0; i < data.length; i++) {
+			counter = 0;
 			int x = 0;
 
 			switch (data[i]) {
@@ -71,12 +72,56 @@ public class Play extends BasicGameState {
 				break;
 			}
 			int y = (int) (currentTick * 0.3) + hitY - (i * (iconSize + 100)) - 800;
-			
+			counter +=1;
+			//System.out.println(y);
+			Input input = container.getInput();
 			g.fillOval(x, y, iconSize, iconSize);
+			//System.out.println(x);
+			//System.out.println("Hi");
+			//System.out.println(y);
+			//System.out.println(counter);
+			boolean scorecheck = false;
+			boolean scorecheck2 = false;
+			if (input.isKeyDown(Input.KEY_A)) {
+				if (x == 466 && (y>=hitY-20 && y <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println(y);
+					System.out.println("yo");
+				}
+				//System.out.println(hitY);
+				//System.out.println(iconSize);
+			}
+			else if (input.isKeyDown(Input.KEY_W)) {
+				if (x == 730 && (y>=hitY-20 && y <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("mom");
+				}
+			}
+			else if (input.isKeyDown(Input.KEY_S)) {
+				if (x == 994 && (y>=hitY-20 && y <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("ahoe");
+				}
+			}
+			else if (input.isKeyDown(Input.KEY_D)) {
+				if (x == 1259 && (y>=hitY-20 && y <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println(x);
+					System.out.println("69");
+				}
+			}
+			if (scorecheck == true)
+			{
+				score += 20;
+			}
 		}
-
+		System.out.println(score);
+		g.drawRect(0,686,1920,262);
 	}
-	
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
