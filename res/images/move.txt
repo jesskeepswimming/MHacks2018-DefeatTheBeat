@@ -1,0 +1,7 @@
+Font:
+Acumin Variable Concept
+ExtraCondensed Medium
+ExtraCondensed ExtraLight
+
+Colour:
+#00BBDE
