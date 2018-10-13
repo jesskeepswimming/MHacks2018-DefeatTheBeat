@@ -13,70 +13,84 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import core.Game;
 
-public class Play extends BasicGameState{
+public class Play extends BasicGameState {
 
-	int [] intarray = {0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,2,2,2,2,2,2,4,4,4,4,4,4};
-	//boolean[][] data = {{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true},{true,true,true,true}};
+	int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2 };
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
+	Image bg;
+	int hitY = 706;
+	int x1 = 466;
+	int x2 = 730;
+	int x3 = 994;
+	int x4 = 1259;
+	int iconSize = 222;
+	Image i1, i2, i3, i4;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		// TODO Auto-generated method stub
+		bg = new Image("res/images/background.png");
+		i1 = new Image("res/images/2make-fist.png");
+		i2 = new Image("res/images/3spread-fingers.png");
+		i3 = new Image("res/images/4wave-left.png");
+		i4 = new Image("res/images/5wave-right.png");
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		boolean key = false;
-		/*
+
+		g.drawImage(bg, 0, 0, container.getWidth(), container.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
+		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
+		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
+		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
+		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
+
+		int length = data.length * iconSize;
+
 		for (int i = 0; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j]) {
-					g.fillRect(100 + j * 80, 100 + i * 80 + currentTick * 80, 40, 40);
-				}
+			int x = 0;
+
+			switch (data[i]) {
+			case 0:
+				x = -1000;
+				break;
+			case 1:
+				x = x1;
+				break;
+			case 2:
+				x = x2;
+				break;
+			case 3:
+				x = x3;
+				break;
+			case 4:
+				x = x4;
+				break;
+			default:
+				break;
 			}
+			int y = (int) (currentTick * 0.5) + hitY - (i * (iconSize + 50));
+			
+			g.fillOval(x, y, iconSize, iconSize);
 		}
-		*/
-		for (int i = 0; i < intarray.length; i++) {
-			if (intarray[i] == 1 && key == true)
-			{
-				
-			}
-			else if (intarray[i]==2)
-			{
-				
-			}
-			else if (intarray[i]==3)
-			{
-				
-			}
-			else if (intarray[i]==4)
-			{
-				
-			}
-		}
+
 	}
+	
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
+
 		Input input = container.getInput();
-		if(input.isKeyDown(Input.KEY_T))
-		{
+		if (input.isKeyDown(Input.KEY_T)) {
 			start = true;
 		}
-		
-		
-		deltaSum += delta;
-		
-		if(start && deltaSum >= 500)
-		{
-			deltaSum -= 500;
-			currentTick++;
+
+		if (start) {
+			currentTick += delta;
 		}
 	}
-	
+
 	@Override
 	public void keyPressed(int key, char c) {
 		// TODO Auto-generated method stub
