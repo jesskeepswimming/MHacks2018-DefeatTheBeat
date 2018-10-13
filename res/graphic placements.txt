@@ -1,0 +1,13 @@
+Canvas: (1920, 1080)
+
+Icon sizes:(222, 222)
+
+fist: (466, 706)
+handspread: (730.16, 706) 
+left: (994.65, 706)
+right: (1259.15, 706)
+
+"Now Playing": (1254, 63) size:(344, 109)
+"Song Name": (1254, 172) 
+
+back button: (71, 74.66) size:(44.14, 50.91)
