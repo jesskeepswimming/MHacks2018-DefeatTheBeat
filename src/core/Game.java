@@ -59,6 +59,7 @@ public class Game extends StateBasedGame {
 			appgc.setDefaultFont(text);
 			appgc.setShowFPS(debugMode);
 			appgc.setTargetFrameRate(fps);
+			appgc.setForceExit(true);
 			appgc.start();
 
 		} catch (SlickException e) {
