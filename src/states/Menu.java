@@ -1,7 +1,6 @@
 package states;
 
 import java.awt.Color;
-import java.util.Arrays;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,47 +12,40 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import core.Game;
 
-public class Play extends BasicGameState{
-
-	boolean[][] data = {{true,false,false,true},{false,false,false,false},{false,false,false,true},{true,true,false,true},{true,false,false,true},{true,false,false,true},{false,false,false,false},{true,true,true,true}};
-	boolean start = false;
-	int deltaSum = 0;
-	int currentTick = 0;
-
+public class Menu extends BasicGameState{
+	
+	Image play;
+	Image background;
+	Image waves;
+	Image text;
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
+		play = new Image("res/images/play.png");
+		background = new Image("res/images/background.png");
+		waves = new Image("res/images/bars.png");
+		text = new Image("res/images/TEXT.png");
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		
-		for (int i = 0; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j]) {
-					g.fillRect(100 + i * 80, 100 + j * 80 + currentTick * 80, 40, 40);
-				}
-			}
-		}
+		// TODO Auto-generated method stub
+
+		g.drawImage(background, 0, 0, container.getWidth(), container.getHeight(), 0, 0);
+		g.drawImage(waves, 628, 330, 628+(waves.getWidth()*2/3),330+waves.getHeight(), 0, 0, waves.getWidth(), waves.getHeight());
+		g.drawImage(play, 760, 650, 820, 720, 0, 0, play.getWidth(), play.getHeight());
+		g.drawImage(text, 520, 150, 520+ text.getWidth(), 150+text.getHeight(), 0,0,text.getWidth(), text.getHeight());
+
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		
-		Input input = container.getInput();
-		if(input.isKeyDown(Input.KEY_T))
-		{
-			start = true;
+		// TODO Auto-generated method stub
+		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			game.enterState(Game.play);
 		}
 		
-		
-		deltaSum += delta;
-		
-		if(start && deltaSum >= 1000)
-		{
-			deltaSum -= 1000;
-			currentTick++;
-		}
 	}
 	
 	@Override
@@ -65,7 +57,7 @@ public class Play extends BasicGameState{
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return Game.play;
+		return Game.menu;
 	}
 
 }

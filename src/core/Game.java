@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
+import states.Menu;
 import states.Play;
 
 public class Game extends StateBasedGame {
@@ -22,9 +23,12 @@ public class Game extends StateBasedGame {
 	public static AppGameContainer appgc;
 
 	public Game(String gameName) throws SlickException {
-
+		
 		super(gameName);
 		this.addState(new Play());
+		
+		this.addState(new Menu());
+
 	}
 
 	@Override
@@ -39,8 +43,12 @@ public class Game extends StateBasedGame {
 		javaFont = new Font("Verdana", Font.BOLD, (int) (appgc.getWidth() / 60));
 		title = new TrueTypeFont(javaFont, true);
 		
+		this.getState(menu).init(appgc, this);
+
+
 		this.getState(play).init(appgc, this);
-		this.enterState(play);
+		this.enterState(menu);
+
 	}
 
 	public static void main(String[] args) {
