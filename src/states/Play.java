@@ -15,7 +15,7 @@ import core.Game;
 
 public class Play extends BasicGameState {
 
-	int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2 };
+	int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2,4,3,2,4,1,3,2,4,0,3,2,0,2,1,2,3,0,0,1,2,3,0 };
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -70,7 +70,7 @@ public class Play extends BasicGameState {
 			default:
 				break;
 			}
-			int y = (int) (currentTick * 0.5) + hitY - (i * (iconSize + 50));
+			int y = (int) (currentTick * 0.3) + hitY - (i * (iconSize + 100)) - 800;
 			
 			g.fillOval(x, y, iconSize, iconSize);
 		}
@@ -92,7 +92,6 @@ public class Play extends BasicGameState {
 
 	@Override
 	public void keyPressed(int key, char c) {
-		// TODO Auto-generated method stub
 		super.keyPressed(key, c);
 	}
 
