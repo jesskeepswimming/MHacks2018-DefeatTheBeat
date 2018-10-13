@@ -15,7 +15,7 @@ public class Game extends StateBasedGame {
 	public static final String gameName = "Beat to Move";
 	public static final String version = "0.0.1";
 	public static final int fps = 119;
-	public static final boolean debugMode = false;
+	public static final boolean debugMode = true;
 	public static final int menu = 1, play = 2;
 
 	public static TrueTypeFont heading, text, title;
@@ -47,7 +47,14 @@ public class Game extends StateBasedGame {
 
 
 		this.getState(play).init(appgc, this);
-		this.enterState(menu);
+		if(debugMode)
+		{
+			this.enterState(play);
+		}
+		else
+		{
+			this.enterState(menu);
+		}
 
 	}
 
@@ -55,7 +62,7 @@ public class Game extends StateBasedGame {
 
 		try {
 			appgc = new AppGameContainer(new Game(gameName + " " + version));
-			appgc.setDisplayMode(1600, 900, false);
+			appgc.setDisplayMode(1920, 1080, false);
 			appgc.setDefaultFont(text);
 			appgc.setShowFPS(debugMode);
 			appgc.setTargetFrameRate(fps);
