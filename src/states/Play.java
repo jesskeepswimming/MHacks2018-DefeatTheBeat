@@ -15,27 +15,36 @@ import core.Game;
 
 public class Play extends BasicGameState{
 
-	boolean[][] data = {{true,false,false,true},{false,false,false,false},{false,false,false,true},{true,true,false,true},{true,false,false,true},{true,false,false,true},{false,false,false,false},{true,true,true,true}};
+	int[] data = {1,1,1,1,2,2,2,2,3,3,3,3,0,0,0,0,1,1,1,1,0,0,0,0,2,2,2};
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
+	Image bg;
+	int hitY = 700;
+	int x1 = 100;
+	int x2 = 200;
+	int x3 = 300;
+	int x4 = 400;
+	Image i1, i2, i3, i4;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		// TODO Auto-generated method stub
+		bg = new Image("res/images/background.png");
+		i1 = new Image("res/images/2make-fist.png");
+		i2 = new Image("res/images/3spread-fingers.png");
+		i3 = new Image("res/images/4wave-left.png");
+		i4 = new Image("res/images/5wave-right.png");
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		
-		for (int i = 0; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j]) {
-					g.fillRect(100 + i * 80, 100 + j * 80 + currentTick * 80, 40, 40);
-				}
-			}
+		g.drawImage(bg, 0, 0, container.getWidth(), container.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
+		g.drawImage(i1, x1, hitY, x1 + 80, hitY + 80, 0, 0, i1.getWidth(), i1.getHeight());
+		g.drawImage(i2, x2, hitY, x2 + 80, hitY + 80, 0, 0, i2.getWidth(), i2.getHeight());
+		g.drawImage(i3, x3, hitY, x3 + 80, hitY + 80, 0, 0, i3.getWidth(), i3.getHeight());
+		g.drawImage(i4, x4, hitY, x4 + 80, hitY + 80, 0, 0, i4.getWidth(), i4.getHeight());
 		}
-	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
