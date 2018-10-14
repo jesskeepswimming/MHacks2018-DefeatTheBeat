@@ -10,13 +10,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import states.beats;
 
 import core.Game;
 
 public class Play extends BasicGameState {
 
-	//int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2,4,3,2,4,1,3,2,4,0,3,2,0,2,1,2,3,0,0,1,2,3,0 };
-	int[] data = {1,1,1,1};
+  int[] data;
+
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -37,6 +38,12 @@ public class Play extends BasicGameState {
 		i2 = new Image("res/images/3spread-fingers.png");
 		i3 = new Image("res/images/4wave-left.png");
 		i4 = new Image("res/images/5wave-right.png");
+		try {
+			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
+			System.out.println(Arrays.toString(data));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
