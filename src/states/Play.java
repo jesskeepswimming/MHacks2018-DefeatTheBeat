@@ -28,6 +28,7 @@ public class Play extends BasicGameState {
 	int[] circleY;
 	boolean[] alive;
 	boolean start = false;
+	boolean bpress = false;
 	int deltaSum = 0;
 	int currentTick = 0;
 
@@ -52,6 +53,7 @@ public class Play extends BasicGameState {
 	int aiconSize = iconSize * 138 / 100;
 	int score = 0;
 	Image bg, i1, i2, i3, i4, a1, a2, a3, a4, back, tap;
+	Image start1;
 	Music main;
 	String songname = "sandstorm";
 	int startindex = 0;
@@ -69,6 +71,7 @@ public class Play extends BasicGameState {
 		a4 = new Image("res/images/5glowwave-right.png");
 		tap = new Image("res/images/1double-tapinv.png");
 		back = new Image("res/images/back.png");
+		start1 = new Image("res/images/startbutt.png");
 	}
 
 	public void start() throws SlickException {
@@ -108,10 +111,25 @@ public class Play extends BasicGameState {
 				back.getWidth(), back.getHeight());
 		g.drawImage(tap, 130, 60, 130 + (tap.getWidth() * 2 / 3), 60 + (tap.getHeight() * 2 / 3), 0, 0, tap.getWidth(),
 				tap.getHeight());
-		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
-		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
-		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
-		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
+		
+		
+		if(!bpress)
+			g.drawImage(start1, (container.getWidth()/2)-(start1.getWidth()/2) , 300, (container.getWidth()/2)-(start1.getWidth()/2) + start1.getWidth(), 300 + start1.getHeight(), 0, 0, start1.getWidth(), start1.getHeight());	
+		
+		if (container.getInput().isKeyDown(Input.KEY_D)) {
+			bpress = true;
+		} 
+		
+		
+		if (bpress) {
+
+			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
+			g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
+			g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
+			g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
+			
+		}
+		
 		
 		g.setFont(Game.title);
 		g.drawString("NOW PLAYING:", 1380, 120);
@@ -182,6 +200,7 @@ public class Play extends BasicGameState {
 
 		Input input = container.getInput();
 
+	
 		if (start) {
 			int distance = indexGap * delta / 100;
 
@@ -228,6 +247,7 @@ public class Play extends BasicGameState {
 			}
 		}
 
+		
 		if (t1 > 0) {
 			t1 -= delta;
 		} else {
@@ -255,7 +275,7 @@ public class Play extends BasicGameState {
 		if (input.isKeyDown(Input.KEY_Z))
 		 {
 			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
-		} else if (input.isKeyDown(Input.KEY_D)) {
+		} else if (input.isKeyDown(Input.KEY_D) && !bpress) {
 			start();
 		}
 	}
