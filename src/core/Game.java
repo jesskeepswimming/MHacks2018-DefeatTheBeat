@@ -44,11 +44,11 @@ public class Game extends StateBasedGame {
 		javaFont = new Font("Montserrat Medium", Font.BOLD, 50);
 		title = new TrueTypeFont(javaFont, true);
 		
-		//this.getState(blackscreen).init(appgc, this);
+		this.getState(blackscreen).init(appgc, this);
 		this.getState(menu).init(appgc, this);
 		this.getState(play).init(appgc, this);
 		
-		this.enterState(menu);
+		this.enterState(blackscreen);
 
 	}
 

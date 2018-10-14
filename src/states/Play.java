@@ -1,8 +1,5 @@
 package states;
 
-import java.awt.Font;
-import java.util.Arrays;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -21,8 +18,6 @@ public class Play extends BasicGameState {
 	int pointcount = 0;
 	boolean b1, b2, b3, b4 = false;
 	int t1, t2, t3, t4 = 0;
-
-	private static final org.newdawn.slick.Font Verdana = null;
 
 	int[] data;
 	int[] circleY;
@@ -72,22 +67,23 @@ public class Play extends BasicGameState {
 		tap = new Image("res/images/1double-tapinv.png");
 		back = new Image("res/images/back.png");
 		start1 = new Image("res/images/startbutt.png");
+		
+		
 	}
 
 	public void start() throws SlickException {
 		try {
 			data = beats.getarray(songname + ".ogg");
-			// System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		main = new Music("songs/" + songname + ".ogg");
+		//main = new Music("songs/" + songname + ".ogg");
 
 		// make sure to derive the size
 		generateMetaData();
 
 		start = true;
-		main.play();
+		//main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
@@ -100,7 +96,6 @@ public class Play extends BasicGameState {
 			circleY[i] = 0 - i * indexGap + hitY;
 			alive[i] = true;
 		}
-
 	}
 
 	@Override
@@ -116,32 +111,19 @@ public class Play extends BasicGameState {
 		if(!bpress)
 			g.drawImage(start1, (container.getWidth()/2)-(start1.getWidth()/2) , 300, (container.getWidth()/2)-(start1.getWidth()/2) + start1.getWidth(), 300 + start1.getHeight(), 0, 0, start1.getWidth(), start1.getHeight());	
 		
-		if (container.getInput().isKeyDown(Input.KEY_D)) {
-			bpress = true;
-		} 
-		
-		
 		if (bpress) {
-
 			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 			g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 			g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 			g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-			
 		}
-		
-		
 		g.setFont(Game.title);
 		g.drawString("NOW PLAYING:", 1380, 120);
 		g.setFont(Game.text);
 		g.drawString(songname, 1380, 190);
-		g.drawString("" + score, 1700, 260);
+		g.drawString("Score: " + score, 1380, 260);
 		if (start) {
-
-
-
 			for (int i = startindex; i < data.length; i++) {
-
 				if (data[i] != 0 && alive[i]) {
 					int x = 0;
 					switch (data[i]) {
@@ -190,17 +172,11 @@ public class Play extends BasicGameState {
 		}
 	}
 
-	private Font Font(String string, int plain, int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
 		Input input = container.getInput();
 
-	
 		if (start) {
 			int distance = indexGap * delta / 100;
 
@@ -246,7 +222,6 @@ public class Play extends BasicGameState {
 				}
 			}
 		}
-
 		
 		if (t1 > 0) {
 			t1 -= delta;
@@ -277,12 +252,8 @@ public class Play extends BasicGameState {
 			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
 		} else if (input.isKeyDown(Input.KEY_D) && !bpress) {
 			start();
+			bpress = true;
 		}
-	}
-
-	@Override
-	public void keyPressed(int key, char c) {
-		super.keyPressed(key, c);
 	}
 
 	@Override
