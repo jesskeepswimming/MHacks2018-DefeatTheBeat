@@ -107,10 +107,10 @@ public class beats {
         }
         Collections.sort(lowpass);
 
-        System.out.println(lowpass);
+        //System.out.println(lowpass);
         int [] res = new int [(int)(sec*10)];
         for(int i = 0; i<lowpass.size(); i++){
-        	System.out.println((int)lowpass.get(i).index*10);
+        	//System.out.println((int)lowpass.get(i).index*10);
             res[(int)lowpass.get(i).index*10] = (int)(Math.random()*4)+1;
         }
         return res;
@@ -130,7 +130,7 @@ public class beats {
 //            System.out.println(audioByte+" "+sample);
             toReturn[audioByte]= new beat(audioByte,sample);
             if(audioByte==100){
-                System.out.println("aa"+sample);
+                //System.out.println("aa"+sample);
             }
         }
         
@@ -170,9 +170,5 @@ public class beats {
 
         return bytesArray;
 
-    }
-    public static void main(String[]args) throws Exception{
-        System.out.println(Arrays.toString(getarray("http://ericamwang.com/videoplayback.aif")));
-    }
-    
+    }    
 }
