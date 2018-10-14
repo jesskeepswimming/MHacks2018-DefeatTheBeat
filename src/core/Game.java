@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import states.BlackScreen;
 import states.Menu;
+import states.PickS;
 import states.Play;
 
 public class Game extends StateBasedGame {
@@ -30,15 +31,17 @@ public class Game extends StateBasedGame {
 		this.addState(new BlackScreen());
 		this.addState(new Menu());
 		this.addState(new Play());
+		
+		this.addState(new PickS());
 	}
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		// fonts
-		Font javaFont = new Font("Montserrat Light Italic", Font.BOLD, 65);
+		Font javaFont = new Font("Montserrat Light Italic", Font.BOLD, 50);
 		heading = new TrueTypeFont(javaFont, true);
 
-		javaFont = new Font("Montserrat Light", Font.PLAIN, 50);
+		javaFont = new Font("Montserrat Light", Font.PLAIN, 20);
 		text = new TrueTypeFont(javaFont, true);
 
 		javaFont = new Font("Montserrat Medium", Font.BOLD, 50);
@@ -47,8 +50,9 @@ public class Game extends StateBasedGame {
 		//this.getState(blackscreen).init(appgc, this);
 		this.getState(menu).init(appgc, this);
 		this.getState(play).init(appgc, this);
+		this.getState(3).init(appgc, this);
 		
-		this.enterState(menu);
+		this.enterState(3);
 
 	}
 
