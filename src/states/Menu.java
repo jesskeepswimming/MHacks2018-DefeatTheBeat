@@ -9,6 +9,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import core.Game;
 
@@ -50,8 +52,8 @@ public class Menu extends BasicGameState{
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			game.enterState(Game.play);
+		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) || container.getInput().isKeyDown(Input.KEY_Z)) {
+			game.enterState(Game.play, new FadeOutTransition(), new FadeInTransition());
 		}
 		
 	}

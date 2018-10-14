@@ -18,5 +18,4 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="MHacks/lib/natives/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="output" path="Communism Simulator 2016/bin"/>
 </classpath>

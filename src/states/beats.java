@@ -65,11 +65,11 @@ public class beats {
     }
     static double indpersec = 518;
     
-    public static int[] getarray() throws Exception {
-        int secpermove = 6;
+    public static int[] getarray(String songpath) throws Exception {
+        double secpermove = 0.5;
         double movepersec = 1/(double)secpermove;
             // convert file to byte[]
-        byte[] bFile = readBytesFromFile(".\\songs\\sandstorm.ogg");
+        byte[] bFile = readBytesFromFile(".\\songs\\" + songpath);
         beat[] graphData = getUnscaledAmplitude(bFile);
         Arrays.sort(graphData);
         
