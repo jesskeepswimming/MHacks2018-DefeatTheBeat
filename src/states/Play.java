@@ -18,11 +18,10 @@ import core.Game;
 
 public class Play extends BasicGameState {
 
-	int pointcount=0;
+	int pointcount = 0;
 	boolean b1, b2, b3, b4 = false;
 	int t1, t2, t3, t4 = 0;
-	
-	
+
 	private static final org.newdawn.slick.Font Verdana = null;
 
 	int[] data;
@@ -34,9 +33,9 @@ public class Play extends BasicGameState {
 
 	// y coord of top of the hit circles
 	int hitY = 706;
-	int ahitY = hitY-42;
-	
-	//pixel difference between array elements
+	int ahitY = hitY - 42;
+
+	// pixel difference between array elements
 	int indexGap = 60;
 	int circleDia = 222;
 
@@ -45,17 +44,16 @@ public class Play extends BasicGameState {
 	int x2 = 730;
 	int x3 = 994;
 	int x4 = 1259;
-	int ax1 = x1-42;
-	int ax2 = x2-42;
-	int ax3 = x3-42;
-	int ax4 = x4-42;
+	int ax1 = x1 - 42;
+	int ax2 = x2 - 42;
+	int ax3 = x3 - 42;
+	int ax4 = x4 - 42;
 	int iconSize = 222;
-	int aiconSize = iconSize*138/100;
+	int aiconSize = iconSize * 138 / 100;
 	int score = 0;
-	Image bg, i1, i2, i3, i4, back, tap;
+	Image bg, i1, i2, i3, i4, a1, a2, a3, a4, back, tap;
 	Music main;
 	String songname = "sandstorm";
-
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -64,19 +62,17 @@ public class Play extends BasicGameState {
 		i2 = new Image("res/images/3spread-fingers.png");
 		i3 = new Image("res/images/4wave-left.png");
 		i4 = new Image("res/images/5wave-right.png");
-		tap = new Image("res/images/1double-tap.png");
-		back = new Image("res/images/back.png");
-	}
-	
-	public void start() throws SlickException
-	{
-		main = new Music("songs/" + songname + ".ogg");
-
 		a1 = new Image("res/images/2glowmake-fist.png");
 		a2 = new Image("res/images/3glowspread-fingers.png");
 		a3 = new Image("res/images/4glowwave-left.png");
 		a4 = new Image("res/images/5glowwave-right.png");
-		
+		tap = new Image("res/images/1double-tap.png");
+		back = new Image("res/images/back.png");
+	}
+
+	public void start() throws SlickException {
+		main = new Music("songs/" + songname + ".ogg");
+
 		// make sure to derive the size
 		try {
 			data = beats.getarray(songname + ".ogg");
@@ -113,7 +109,7 @@ public class Play extends BasicGameState {
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-		if(start) {
+		if (start) {
 			g.setFont(Game.title);
 			g.drawString("NOW PLAYING:", 1380, 120);
 
@@ -143,37 +139,33 @@ public class Play extends BasicGameState {
 						break;
 					}
 					g.fillOval(x, circleY[i], circleDia, circleDia);
-        }
-      }
-		
-		if(!b1) {
-			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());			
-		}
-		else {
-        	g.drawImage(a1, ax1, ahitY, ax1 + aiconSize, ahitY + aiconSize, 0, 0, a1.getWidth(), a1.getHeight());
-		}
-		
-		if(!b2) {
-			g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
-		} else {
-        	g.drawImage(a2, ax2, ahitY, ax2 + aiconSize, ahitY + aiconSize, 0, 0, a2.getWidth(), a2.getHeight());
-		}
-		
-		if(!b3) {
-			g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
-		} else {
-        	g.drawImage(a3, ax3, ahitY, ax3 + aiconSize, ahitY + aiconSize, 0, 0, a3.getWidth(), a3.getHeight());
-		}
-		
-		if(!b4) {
-			g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());			
-		} else {
-        	g.drawImage(a4, ax4, ahitY, ax4 + aiconSize, ahitY + aiconSize, 0, 0, a4.getWidth(), a4.getHeight());
-		}
 				}
 			}
-		}
 
+			if (!b1) {
+				g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
+			} else {
+				g.drawImage(a1, ax1, ahitY, ax1 + aiconSize, ahitY + aiconSize, 0, 0, a1.getWidth(), a1.getHeight());
+			}
+
+			if (!b2) {
+				g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
+			} else {
+				g.drawImage(a2, ax2, ahitY, ax2 + aiconSize, ahitY + aiconSize, 0, 0, a2.getWidth(), a2.getHeight());
+			}
+
+			if (!b3) {
+				g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
+			} else {
+				g.drawImage(a3, ax3, ahitY, ax3 + aiconSize, ahitY + aiconSize, 0, 0, a3.getWidth(), a3.getHeight());
+			}
+
+			if (!b4) {
+				g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
+			} else {
+				g.drawImage(a4, ax4, ahitY, ax4 + aiconSize, ahitY + aiconSize, 0, 0, a4.getWidth(), a4.getHeight());
+			}
+		}
 	}
 
 	private Font Font(String string, int plain, int i) {
@@ -185,18 +177,14 @@ public class Play extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
 		Input input = container.getInput();
-		
-		if(input.isKeyDown(Input.KEY_Z))
-		{
-			//game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
-		} 
-		else if(input.isKeyDown(Input.KEY_V))
-		{
+
+		if (input.isKeyDown(Input.KEY_Z)) {
+			// game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
+		} else if (input.isKeyDown(Input.KEY_V)) {
 			start();
 		}
-		
-		
-		if(start) {
+
+		if (start) {
 			int distance = indexGap * delta / 100;
 
 			for (int i = 0; i < circleY.length; i++) {
@@ -210,50 +198,57 @@ public class Play extends BasicGameState {
 							scorecheck = true;
 							score++;
 							circleY[i] = 1000000;
-
+							b1 = true;
+							t1 = 400;
 						}
 					} else if (input.isKeyDown(Input.KEY_W)) {
 						if (data[i] == 2) {
 							scorecheck = true;
 							score++;
 							circleY[i] = 1000000;
+							b2 = true;
+							t2 = 400;
 						}
 					} else if (input.isKeyDown(Input.KEY_S)) {
 						if (data[i] == 3) {
 							scorecheck = true;
 							score++;
 							circleY[i] = 1000000;
+							b3 = true;
+							t3 = 400;
 						}
 					} else if (input.isKeyDown(Input.KEY_D)) {
 						if (data[i] == 4) {
 							scorecheck = true;
 							score++;
 							circleY[i] = 1000000;
+							b4 = true;
+							t4 = 400;
 						}
 					}
 				}
 			}
 		}
-			
-		if(t1 > 0)	{
+
+		if (t1 > 0) {
 			t1 -= delta;
 		} else {
 			b1 = false;
 		}
-		
-		if(t2 > 0)	{
+
+		if (t2 > 0) {
 			t2 -= delta;
 		} else {
 			b2 = false;
 		}
-		
-		if(t3 > 0)	{
+
+		if (t3 > 0) {
 			t3 -= delta;
 		} else {
 			b3 = false;
 		}
-		
-		if(t4 > 0)	{
+
+		if (t4 > 0) {
 			t4 -= delta;
 		} else {
 			b4 = false;
