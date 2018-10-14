@@ -65,7 +65,7 @@ public class beats {
     }
     static double indpersec = 518;
     
-    public static int[] getarray(String url) throws Exception {
+    public static int[] getarray() throws Exception {
         int secpermove = 6;
         double movepersec = 1/(double)secpermove;
             // convert file to byte[]

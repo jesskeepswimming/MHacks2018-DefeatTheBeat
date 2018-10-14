@@ -56,7 +56,7 @@ public class Play extends BasicGameState {
 
 		// make sure to derive the size
 		try {
-			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
+			data = beats.getarray();
 			//System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
