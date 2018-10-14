@@ -73,6 +73,7 @@ public class beats {
         beat[] graphData = getUnscaledAmplitude(bFile);
         Arrays.sort(graphData);
         
+        
         double sec = graphData.length/indpersec;
         double estmoves = sec*movepersec;
         //first colomn time, second colomn val
@@ -105,9 +106,11 @@ public class beats {
             index++;
         }
         Collections.sort(lowpass);
-        
+
+        System.out.println(lowpass);
         int [] res = new int [(int)(sec*10)];
         for(int i = 0; i<lowpass.size(); i++){
+        	System.out.println((int)lowpass.get(i).index*10);
             res[(int)lowpass.get(i).index*10] = (int)(Math.random()*4)+1;
         }
         return res;
@@ -167,6 +170,9 @@ public class beats {
 
         return bytesArray;
 
+    }
+    public static void main(String[]args) throws Exception{
+        System.out.println(Arrays.toString(getarray("http://ericamwang.com/videoplayback.aif")));
     }
     
 }

@@ -38,6 +38,7 @@ public class Play extends BasicGameState {
 		i4 = new Image("res/images/5wave-right.png");
 		try {
 			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
+			System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +77,7 @@ public class Play extends BasicGameState {
 			default:
 				break;
 			}
-			int y = (int) (currentTick * 0.5) + hitY - (i * (iconSize + 50));
+			int y = (int) (currentTick * 40) + hitY - (i * (iconSize + 50));
 			
 			g.fillOval(x, y, iconSize, iconSize);
 		}
