@@ -13,16 +13,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
+import states.BlackScreen;
 import states.Menu;
 import states.Play;
 
 public class Game extends StateBasedGame {
 
-	public static final String gameName = "Beat to Move";
-	public static final String version = "0.0.1";
+	public static final String gameName = "Defeat the Beat";
+	public static final String version = "0.0.2";
 	public static final int fps = 119;
-	public static final boolean debugMode = true;
-	public static final int menu = 1, play = 2;
+	public static final boolean debugMode = false;
+	public static final int blackscreen = 0, menu = 1, play = 2;
 
 	public static TrueTypeFont heading, text, title;
 
@@ -31,10 +32,9 @@ public class Game extends StateBasedGame {
 	public Game(String gameName) throws SlickException {
 		
 		super(gameName);
-		this.addState(new Play());
-		
+		this.addState(new BlackScreen());
 		this.addState(new Menu());
-
+		this.addState(new Play());
 	}
 
 	@Override
@@ -49,10 +49,8 @@ public class Game extends StateBasedGame {
 		javaFont = new Font("Montserrat Medium", Font.BOLD, 50);
 		title = new TrueTypeFont(javaFont, true);
 		
-		
+		//this.getState(blackscreen).init(appgc, this);
 		this.getState(menu).init(appgc, this);
-
-
 		this.getState(play).init(appgc, this);
 		
 		this.enterState(menu);
