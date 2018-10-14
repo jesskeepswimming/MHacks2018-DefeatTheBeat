@@ -27,7 +27,7 @@ public class BlackScreen extends BasicGameState{
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException{
 
-		game.enterState(Game.menu, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
+		game.enterState(1, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500));
 	}
 
 	@Override

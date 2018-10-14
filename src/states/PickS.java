@@ -133,6 +133,7 @@ public class PickS extends BasicGameState{
 				songcounter--;
 			}
 		};
+		Game.song = songs[songcounter];
 		super.keyPressed(key, c);
 	}
 

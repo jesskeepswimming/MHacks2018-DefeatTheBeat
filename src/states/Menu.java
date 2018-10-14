@@ -57,7 +57,7 @@ public class Menu extends BasicGameState{
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) || container.getInput().isKeyDown(Input.KEY_Z)) {
-			game.enterState(Game.play, new FadeOutTransition(), new FadeInTransition());
+			game.enterState(3, new FadeOutTransition(), new FadeInTransition());
 		}
 		
 	}
