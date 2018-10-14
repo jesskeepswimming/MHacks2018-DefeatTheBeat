@@ -1,0 +1,8 @@
+a - fist 
+w - spread
+s - left
+d - right
+z - touch fingers
+
+v - back 
+ 

@@ -54,6 +54,7 @@ public class Play extends BasicGameState {
 	Image bg, i1, i2, i3, i4, a1, a2, a3, a4, back, tap;
 	Music main;
 	String songname = "sandstorm";
+	int startindex = 0;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -66,32 +67,34 @@ public class Play extends BasicGameState {
 		a2 = new Image("res/images/3glowspread-fingers.png");
 		a3 = new Image("res/images/4glowwave-left.png");
 		a4 = new Image("res/images/5glowwave-right.png");
-		tap = new Image("res/images/1double-tap.png");
+		tap = new Image("res/images/1double-tapinv.png");
 		back = new Image("res/images/back.png");
 	}
 
 	public void start() throws SlickException {
-		main = new Music("songs/" + songname + ".ogg");
-
-		// make sure to derive the size
 		try {
 			data = beats.getarray(songname + ".ogg");
 			// System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		main = new Music("songs/" + songname + ".ogg");
+
+		// make sure to derive the size
 		generateMetaData();
 
-		main.play();
 		start = true;
+		main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
 	public void generateMetaData() {
 		circleY = new int[data.length];
 		alive = new boolean[data.length];
-		for (int i = 0; i < data.length; i++) {
-			circleY[i] = 0 - i * indexGap;
+		startindex = hitY/indexGap;
+		for (int i = startindex; i < data.length; i++) {
+			
+			circleY[i] = 0 - i * indexGap + hitY;
 			alive[i] = true;
 		}
 
@@ -109,16 +112,17 @@ public class Play extends BasicGameState {
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
+		
+		g.setFont(Game.title);
+		g.drawString("NOW PLAYING:", 1380, 120);
+		g.setFont(Game.text);
+		g.drawString(songname, 1380, 190);
+		g.drawString("" + score, 1700, 260);
 		if (start) {
-			g.setFont(Game.title);
-			g.drawString("NOW PLAYING:", 1380, 120);
 
-			g.setFont(Game.text);
-			g.drawString(songname, 1380, 190);
 
-			g.drawString("" + score, 1700, 260);
 
-			for (int i = 0; i < data.length; i++) {
+			for (int i = startindex; i < data.length; i++) {
 
 				if (data[i] != 0 && alive[i]) {
 					int x = 0;
@@ -178,16 +182,10 @@ public class Play extends BasicGameState {
 
 		Input input = container.getInput();
 
-		if (input.isKeyDown(Input.KEY_Z)) {
-			// game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
-		} else if (input.isKeyDown(Input.KEY_V)) {
-			start();
-		}
-
 		if (start) {
 			int distance = indexGap * delta / 100;
 
-			for (int i = 0; i < circleY.length; i++) {
+			for (int i = startindex; i < circleY.length; i++) {
 
 				circleY[i] += distance;
 
@@ -252,6 +250,13 @@ public class Play extends BasicGameState {
 			t4 -= delta;
 		} else {
 			b4 = false;
+		}
+		
+		if (input.isKeyDown(Input.KEY_Z))
+		 {
+			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
+		} else if (input.isKeyDown(Input.KEY_D)) {
+			start();
 		}
 	}
 

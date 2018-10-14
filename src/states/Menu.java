@@ -21,15 +21,16 @@ public class Menu extends BasicGameState{
 	Image waves;
 	Image text;
 	Image tap;
+	Image logo;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
 		play = new Image("res/images/play.png");
 		background = new Image("res/images/background.png");
-		waves = new Image("res/images/bars2.png");
-		text = new Image("res/images/title.png");
-		tap = new Image("res/images/1double-tap.png");
+		logo = new Image("res/images/logo.png");
+		tap = new Image("res/images/1double-tapinv.png");
+		
 	}
 
 	@Override
@@ -38,10 +39,13 @@ public class Menu extends BasicGameState{
 
 		int mid = container.getWidth()/2;
 		g.drawImage(background, 0, 0, mid*2, container.getHeight(), 0, 0);
-		g.drawImage(text, mid-(text.getWidth()/2), 200, (mid-text.getWidth()/2)+text.getWidth(),200 + text.getHeight() , 0,0, text.getWidth(), text.getHeight());
-		g.drawImage(waves, mid-waves.getWidth()/2, 350, (mid-waves.getWidth()/2)+waves.getWidth(),350+(waves.getHeight()), 0, 0, waves.getWidth(), waves.getHeight());
-		g.drawImage(play, mid + 60, 700, mid+60+play.getWidth()*1/7, 700+play.getHeight()*1/7, 0, 0, play.getWidth(), play.getHeight());
-		g.drawImage(tap, mid-tap.getWidth()+10, 650, mid+10, 650+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
+		//g.drawImage(text, mid-(text.getWidth()/2), 200, (mid-text.getWidth()/2)+text.getWidth(),200 + text.getHeight() , 0,0, text.getWidth(), text.getHeight());
+		//g.drawImage(waves, mid-waves.getWidth()/2, 350, (mid-waves.getWidth()/2)+waves.getWidth(),350+(waves.getHeight()), 0, 0, waves.getWidth(), waves.getHeight());
+		
+		g.drawImage(logo, mid-logo.getWidth()*4/10, 0, (mid-logo.getWidth()*4/10)+logo.getWidth()*4/5,(logo.getHeight()*4/5), 0, 0, logo.getWidth(), logo.getHeight());
+		
+		g.drawImage(play, mid + 60, 720, mid+60+play.getWidth()*1/7, 720+play.getHeight()*1/7, 0, 0, play.getWidth(), play.getHeight());
+		g.drawImage(tap, mid-tap.getWidth()+10, 670, mid+10, 670+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
 		
 		// g.setFont(Game.heading);
 		//int wid = Game.heading.getWidth("DEFEAT THE BEAT");
