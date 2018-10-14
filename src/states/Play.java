@@ -18,6 +18,11 @@ import core.Game;
 
 public class Play extends BasicGameState {
 
+	int pointcount=0;
+	boolean b1, b2, b3, b4 = false;
+	int t1, t2, t3, t4 = 0;
+	
+	
 	private static final org.newdawn.slick.Font Verdana = null;
 
 	int[] data;
@@ -29,9 +34,10 @@ public class Play extends BasicGameState {
 
 	// y coord of top of the hit circles
 	int hitY = 706;
-
-	// pixel difference between array elements
-	int indexGap = 80;
+	int ahitY = hitY-42;
+	
+	//pixel difference between array elements
+	int indexGap = 60;
 	int circleDia = 222;
 
 	// location of tracks
@@ -39,11 +45,17 @@ public class Play extends BasicGameState {
 	int x2 = 730;
 	int x3 = 994;
 	int x4 = 1259;
+	int ax1 = x1-42;
+	int ax2 = x2-42;
+	int ax3 = x3-42;
+	int ax4 = x4-42;
 	int iconSize = 222;
+	int aiconSize = iconSize*138/100;
 	int score = 0;
 	Image bg, i1, i2, i3, i4, back, tap;
 	Music main;
 	String songname = "sandstorm";
+
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -60,6 +72,11 @@ public class Play extends BasicGameState {
 	{
 		main = new Music("songs/" + songname + ".ogg");
 
+		a1 = new Image("res/images/2glowmake-fist.png");
+		a2 = new Image("res/images/3glowspread-fingers.png");
+		a3 = new Image("res/images/4glowwave-left.png");
+		a4 = new Image("res/images/5glowwave-right.png");
+		
 		// make sure to derive the size
 		try {
 			data = beats.getarray(songname + ".ogg");
@@ -92,7 +109,6 @@ public class Play extends BasicGameState {
 				back.getWidth(), back.getHeight());
 		g.drawImage(tap, 130, 60, 130 + (tap.getWidth() * 2 / 3), 60 + (tap.getHeight() * 2 / 3), 0, 0, tap.getWidth(),
 				tap.getHeight());
-
 		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
@@ -127,6 +143,33 @@ public class Play extends BasicGameState {
 						break;
 					}
 					g.fillOval(x, circleY[i], circleDia, circleDia);
+        }
+      }
+		
+		if(!b1) {
+			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());			
+		}
+		else {
+        	g.drawImage(a1, ax1, ahitY, ax1 + aiconSize, ahitY + aiconSize, 0, 0, a1.getWidth(), a1.getHeight());
+		}
+		
+		if(!b2) {
+			g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
+		} else {
+        	g.drawImage(a2, ax2, ahitY, ax2 + aiconSize, ahitY + aiconSize, 0, 0, a2.getWidth(), a2.getHeight());
+		}
+		
+		if(!b3) {
+			g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
+		} else {
+        	g.drawImage(a3, ax3, ahitY, ax3 + aiconSize, ahitY + aiconSize, 0, 0, a3.getWidth(), a3.getHeight());
+		}
+		
+		if(!b4) {
+			g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());			
+		} else {
+        	g.drawImage(a4, ax4, ahitY, ax4 + aiconSize, ahitY + aiconSize, 0, 0, a4.getWidth(), a4.getHeight());
+		}
 				}
 			}
 		}
@@ -190,6 +233,30 @@ public class Play extends BasicGameState {
 					}
 				}
 			}
+		}
+			
+		if(t1 > 0)	{
+			t1 -= delta;
+		} else {
+			b1 = false;
+		}
+		
+		if(t2 > 0)	{
+			t2 -= delta;
+		} else {
+			b2 = false;
+		}
+		
+		if(t3 > 0)	{
+			t3 -= delta;
+		} else {
+			b3 = false;
+		}
+		
+		if(t4 > 0)	{
+			t4 -= delta;
+		} else {
+			b4 = false;
 		}
 	}
 
