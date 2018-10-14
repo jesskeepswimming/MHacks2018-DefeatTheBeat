@@ -20,6 +20,7 @@ public class Play extends BasicGameState {
 	
 	int[] data;
 	int[] circleY;
+	boolean[] alive;
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -52,7 +53,7 @@ public class Play extends BasicGameState {
 		tap = new Image("res/images/1double-tap.png");
 		back = new Image("res/images/back.png");
 		
-		main = new Music("songs/sandstorm.ogg");
+		//main = new Music("songs/sandstorm.ogg");
 
 		// make sure to derive the size
 		try {
@@ -63,14 +64,16 @@ public class Play extends BasicGameState {
 		}
 		generateMetaData();
 		
-		main.play();
+		//main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
 	public void generateMetaData() {
 		circleY = new int[data.length];
+		alive = new boolean[data.length];
 		for (int i = 0; i < data.length; i++) {
 			circleY[i] = 0 - i * indexGap;
+			alive[i] = true;
 		}
 		
 	}
@@ -89,6 +92,8 @@ public class Play extends BasicGameState {
 
 		g.setFont(Game.text);
 		g.drawString(songname, 1380, 190);
+		
+		g.drawString("" + score, 600, 600);
 
 		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
@@ -96,61 +101,30 @@ public class Play extends BasicGameState {
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
 		for (int i = 0; i < data.length; i++) {
 
-			int x = 0;
-
-			switch (data[i]) {
-			case 0:
-				//draw off screen
-				x = -69420;
-				break;
-			case 1:
-				x = x1;
-				break;
-			case 2:
-				x = x2;
-				break;
-			case 3:
-				x = x3;
-				break;
-			case 4:
-				x = x4;
-				break;
-			default:
-				break;
-			}
-			
-			g.fillOval(x, circleY[i], circleDia, circleDia);
-			Input input = container.getInput();
-			boolean scorecheck = false;
-			if (input.isKeyDown(Input.KEY_A)) {
-				if (data[i] == 1 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("a");
+			if (data[i] != 0) {
+				int x = 0;
+				switch (data[i]) {
+				case 0:
+					//draw off screen
+					x = -69420;
+					break;
+				case 1:
+					x = x1;
+					break;
+				case 2:
+					x = x2;
+					break;
+				case 3:
+					x = x3;
+					break;
+				case 4:
+					x = x4;
+					break;
+				default:
+					break;
 				}
+				g.fillOval(x, circleY[i], circleDia, circleDia);
 			}
-			else if (input.isKeyDown(Input.KEY_W)) {
-				if (data[i] == 2 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("b");
-				}
-			}
-			else if (input.isKeyDown(Input.KEY_S)) {
-				if (data[i] == 3 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("c");
-				}
-			}
-			else if (input.isKeyDown(Input.KEY_D)) {
-				if (data[i] == 4 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("d");
-				}
-			}
-
 		}
 
 	}
@@ -168,6 +142,50 @@ public class Play extends BasicGameState {
 		for (int i = 0; i < circleY.length; i++) {
 			
 			circleY[i] += distance;
+			
+			
+			if(circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20) {
+				System.out.println("d"+score);
+				Input input = container.getInput();
+				boolean scorecheck = false;
+				if (input.isKeyDown(Input.KEY_A)) {
+					if (data[i] == 1)
+					{
+						scorecheck = true;
+						System.out.println("a" + score);
+						score++;
+						circleY[i]=1000000;
+						
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_W)) {
+					if (data[i] == 2)
+					{
+						scorecheck = true;
+						System.out.println("b"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_S)) {
+					if (data[i] == 3 )
+					{
+						scorecheck = true;
+						System.out.println("c"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_D)) {
+					if (data[i] == 4)
+					{
+						scorecheck = true;
+						System.out.println("d"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+			}
 		}
 	}
 
