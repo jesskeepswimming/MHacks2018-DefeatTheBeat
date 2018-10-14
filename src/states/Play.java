@@ -1,12 +1,6 @@
 package states;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Arrays;
 
 import org.newdawn.slick.GameContainer;
@@ -14,30 +8,37 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import states.beats;
 
 import core.Game;
 
 public class Play extends BasicGameState {
 
 	private static final org.newdawn.slick.Font Verdana = null;
-  int[] data;
+	
+	int[] data;
+	int[] circleY;
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
-	Image bg;
+	
+	//y coord of top of the hit circles
 	int hitY = 706;
+	
+	//pixel difference between array elements
+	int indexGap = 15;
+	int circleDia = 222;
+	
+	//location of tracks
 	int x1 = 466;
 	int x2 = 730;
 	int x3 = 994;
 	int x4 = 1259;
 	int iconSize = 222;
-	Image i1, i2, i3, i4, back, tap;
-	String songname = "SONG NAME";
 	int score = 0;
+	Image bg, i1, i2, i3, i4, back, tap;
+	String songname = "SONG NAME";
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -48,7 +49,7 @@ public class Play extends BasicGameState {
 		i4 = new Image("res/images/5wave-right.png");
 		tap = new Image("res/images/1double-tap.png");
 		back = new Image("res/images/back.png");
-	
+
 		// make sure to derive the size
 		try {
 			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
@@ -56,37 +57,46 @@ public class Play extends BasicGameState {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		generateMetaData();
+	}
+
+	// generates values needed to run game based of inputed beat map
+	public void generateMetaData() {
+		circleY = new int[data.length];
+
+		for (int i = 0; i < data.length; i++) {
+			circleY[i] = 0 - i * indexGap;
+		}
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 
 		g.drawImage(bg, 0, 0, container.getWidth(), container.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
-		g.drawImage(back, 60, 90, 50+(back.getWidth()*1/9), 80+(back.getHeight()*1/9), 0, 0, back.getWidth(), back.getHeight());
-		g.drawImage(tap, 130, 60, 130+(tap.getWidth()*2/3), 60+(tap.getHeight()*2/3), 0, 0, tap.getWidth(), tap.getHeight());
-		
+		g.drawImage(back, 60, 90, 50 + (back.getWidth() * 1 / 9), 80 + (back.getHeight() * 1 / 9), 0, 0,
+				back.getWidth(), back.getHeight());
+		g.drawImage(tap, 130, 60, 130 + (tap.getWidth() * 2 / 3), 60 + (tap.getHeight() * 2 / 3), 0, 0, tap.getWidth(),
+				tap.getHeight());
 
 		g.setFont(Game.title);
 		g.drawString("NOW PLAYING:", 1380, 120);
-		
+
 		g.setFont(Game.text);
 		g.drawString(songname, 1380, 190);
 
-		
 		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-		
-		int length = data.length * iconSize;
-		int counter = 0;
+
 		for (int i = 0; i < data.length; i++) {
-			counter = 0;
+
 			int x = 0;
 
 			switch (data[i]) {
 			case 0:
-				x = -1000;
+				//draw off screen
+				x = -69420;
 				break;
 			case 1:
 				x = x1;
@@ -103,57 +113,10 @@ public class Play extends BasicGameState {
 			default:
 				break;
 			}
-			int y = (int) (currentTick * 0.3) + hitY - (i * (iconSize + 100)) - 800;
-			counter +=1;
-			//System.out.println(y);
-			Input input = container.getInput();
-			g.fillOval(x, y, iconSize, iconSize);
-			//System.out.println(x);
-			//System.out.println("Hi");
-			//System.out.println(y);
-			//System.out.println(counter);
-			boolean scorecheck = false;
-			boolean scorecheck2 = false;
-			if (input.isKeyDown(Input.KEY_A)) {
-				if (x == 466 && (y>=hitY-20 && y <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					//System.out.println(y);
-					System.out.println("yo");
-				}
-				//System.out.println(hitY);
-				//System.out.println(iconSize);
-			}
-			else if (input.isKeyDown(Input.KEY_W)) {
-				if (x == 730 && (y>=hitY-20 && y <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("mom");
-				}
-			}
-			else if (input.isKeyDown(Input.KEY_S)) {
-				if (x == 994 && (y>=hitY-20 && y <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println("ahoe");
-				}
-			}
-			else if (input.isKeyDown(Input.KEY_D)) {
-				if (x == 1259 && (y>=hitY-20 && y <=hitY+iconSize+20))
-				{
-					scorecheck = true;
-					System.out.println(x);
-					System.out.println("69");
-				}
-			}
-			if (scorecheck == true)
-			{
-				score += 20;
-				System.out.println("hi");
-			}
+
+			g.fillOval(x, circleY[i], circleDia, circleDia);
 		}
-		System.out.println(score);
-		g.drawRect(0,686,1920,262);
+
 	}
 
 	private Font Font(String string, int plain, int i) {
@@ -163,14 +126,12 @@ public class Play extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-
-		Input input = container.getInput();
-		if (input.isKeyDown(Input.KEY_T)) {
-			start = true;
-		}
-
-		if (start) {
-			currentTick += delta;
+		
+		int distance = indexGap * delta / 100;
+			
+		for (int i = 0; i < circleY.length; i++) {
+			
+			circleY[i] += distance;
 		}
 	}
 
