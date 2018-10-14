@@ -49,7 +49,7 @@ public class Play extends BasicGameState {
 	int score = 0;
 	Image bg, i1, i2, i3, i4, a1, a2, a3, a4, back, tap;
 	Image start1;
-	Music main;
+	Music s1, s2, s3, s4, s5, s6, s7, s8, s9;
 	String songname = "sandstorm";
 	int startindex = 0;
 
@@ -67,8 +67,17 @@ public class Play extends BasicGameState {
 		tap = new Image("res/images/1double-tapinv.png");
 		back = new Image("res/images/back.png");
 		start1 = new Image("res/images/startbutt.png");
-		
-		
+
+		s1 = new Music("songs/Darude - Sandstorm.ogg");
+		s2 = new Music("songs/Digital Insanity - Welcome to our world.ogg");
+		s3 = new Music("songs/Lil Pump -  Gucci Gang.ogg");
+		s4 = new Music("songs/Luis Fonsi - Despacito.ogg");
+		s5 = new Music("songs/Neil Diamond - Sweet Caroline.ogg");
+		s5 = new Music("songs/Smash Mouth - All Star.ogg");
+		s6 = new Music("songs/The Black Eyed Peas - I Gotta Feeling.ogg");
+		s7 = new Music("songs/Toto - Africa.ogg");
+		s8 = new Music("songs/Twice - Knock Knock.ogg");
+		s9 = new Music("songs/We are #1.ogg");
 	}
 
 	public void start() throws SlickException {
@@ -77,22 +86,19 @@ public class Play extends BasicGameState {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//main = new Music("songs/" + songname + ".ogg");
-
-		// make sure to derive the size
 		generateMetaData();
 
 		start = true;
-		//main.play();
+		// main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
 	public void generateMetaData() {
 		circleY = new int[data.length];
 		alive = new boolean[data.length];
-		startindex = hitY/indexGap;
+		startindex = hitY / indexGap;
 		for (int i = startindex; i < data.length; i++) {
-			
+
 			circleY[i] = 0 - i * indexGap + hitY;
 			alive[i] = true;
 		}
@@ -106,11 +112,12 @@ public class Play extends BasicGameState {
 				back.getWidth(), back.getHeight());
 		g.drawImage(tap, 130, 60, 130 + (tap.getWidth() * 2 / 3), 60 + (tap.getHeight() * 2 / 3), 0, 0, tap.getWidth(),
 				tap.getHeight());
-		
-		
-		if(!bpress)
-			g.drawImage(start1, (container.getWidth()/2)-(start1.getWidth()/2) , 300, (container.getWidth()/2)-(start1.getWidth()/2) + start1.getWidth(), 300 + start1.getHeight(), 0, 0, start1.getWidth(), start1.getHeight());	
-		
+
+		if (!bpress)
+			g.drawImage(start1, (container.getWidth() / 2) - (start1.getWidth() / 2), 300,
+					(container.getWidth() / 2) - (start1.getWidth() / 2) + start1.getWidth(), 300 + start1.getHeight(),
+					0, 0, start1.getWidth(), start1.getHeight());
+
 		if (bpress) {
 			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 			g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
@@ -222,7 +229,7 @@ public class Play extends BasicGameState {
 				}
 			}
 		}
-		
+
 		if (t1 > 0) {
 			t1 -= delta;
 		} else {
@@ -246,9 +253,8 @@ public class Play extends BasicGameState {
 		} else {
 			b4 = false;
 		}
-		
-		if (input.isKeyDown(Input.KEY_Z))
-		 {
+
+		if (input.isKeyDown(Input.KEY_Z)) {
 			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
 		} else if (input.isKeyDown(Input.KEY_D) && !bpress) {
 			start();
