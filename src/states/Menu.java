@@ -38,8 +38,9 @@ public class Menu extends BasicGameState{
 		g.drawImage(waves, 642, 330, 642+(waves.getWidth()*5/6),330+(waves.getHeight()*5/6), 0, 0, waves.getWidth(), waves.getHeight());
 		g.drawImage(play, 860, 650, 920, 720, 0, 0, play.getWidth(), play.getHeight());
 		g.drawImage(tap, 650, 600, 650+tap.getWidth(), 600+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
-		g.drawImage(text, 520, 150, 520+ text.getWidth(), 150+text.getHeight(), 0,0,text.getWidth(), text.getHeight());
-
+		g.setFont(Game.heading);
+		int wid = Game.heading.getWidth("GESTURE JESTER");
+		g.drawString("GESTURE JESTER", container.getWidth()/2-wid/2, 120);
 	}
 
 	@Override

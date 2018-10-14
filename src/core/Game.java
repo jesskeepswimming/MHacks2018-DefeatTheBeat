@@ -1,6 +1,12 @@
 package core;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -34,14 +40,15 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		// fonts
-		Font javaFont = new Font("Verdana", Font.BOLD, (int) (appgc.getWidth() / 80));
+		Font javaFont = new Font("Montserrat Medium", Font.BOLD, 60);
 		heading = new TrueTypeFont(javaFont, true);
 
-		javaFont = new Font("Verdana", Font.PLAIN, (int) (appgc.getWidth() / 90));
+		javaFont = new Font("Montserrat Light", Font.PLAIN, 50);
 		text = new TrueTypeFont(javaFont, true);
 
-		javaFont = new Font("Verdana", Font.BOLD, (int) (appgc.getWidth() / 60));
+		javaFont = new Font("Montserrat Medium", Font.BOLD, 50);
 		title = new TrueTypeFont(javaFont, true);
+		
 		
 		this.getState(menu).init(appgc, this);
 
@@ -62,11 +69,10 @@ public class Game extends StateBasedGame {
 
 		try {
 			appgc = new AppGameContainer(new Game(gameName + " " + version));
-			appgc.setDisplayMode(1920, 1080, false);
+			appgc.setDisplayMode(1920, 1080, true);
 			appgc.setDefaultFont(text);
 			appgc.setShowFPS(debugMode);
 			appgc.setTargetFrameRate(fps);
-			appgc.setForceExit(true);
 			appgc.start();
 
 		} catch (SlickException e) {
