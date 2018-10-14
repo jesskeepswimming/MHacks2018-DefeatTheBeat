@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -27,6 +28,7 @@ public class Play extends BasicGameState {
 	
 	int[] data;
 	int[] circleY;
+	boolean[] alive;
 	boolean start = false;
 	int deltaSum = 0;
 	int currentTick = 0;
@@ -52,6 +54,7 @@ public class Play extends BasicGameState {
 	int aiconSize = iconSize*138/100;
 	int score = 0;
 	Image bg, i1, i2, i3, i4, back, tap;
+	Music main;
 	String songname = "SONG NAME";
 	Image a1, a2, a3, a4;
 	
@@ -65,6 +68,8 @@ public class Play extends BasicGameState {
 		i4 = new Image("res/images/5wave-right.png");
 		tap = new Image("res/images/1double-tap.png");
 		back = new Image("res/images/back.png");
+		
+		//main = new Music("songs/sandstorm.ogg");
 
 		a1 = new Image("res/images/2glowmake-fist.png");
 		a2 = new Image("res/images/3glowspread-fingers.png");
@@ -73,21 +78,25 @@ public class Play extends BasicGameState {
 		
 		// make sure to derive the size
 		try {
-			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
-			System.out.println(Arrays.toString(data));
+			data = beats.getarray();
+			//System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		generateMetaData();
+		
+		//main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
 	public void generateMetaData() {
 		circleY = new int[data.length];
-
+		alive = new boolean[data.length];
 		for (int i = 0; i < data.length; i++) {
 			circleY[i] = 0 - i * indexGap;
+			alive[i] = true;
 		}
+		
 	}
 
 	@Override
@@ -103,6 +112,7 @@ public class Play extends BasicGameState {
 		g.drawString("NOW PLAYING:", 1380, 120);
 		g.setFont(Game.text);
 		g.drawString(songname, 1380, 190);
+		g.drawString("" + score, 600, 600);
 		
 		if(!b1) {
 			g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());			
@@ -131,30 +141,30 @@ public class Play extends BasicGameState {
 		
 		for (int i = 0; i < data.length; i++) {
 
-			int x = 0;
-
-			switch (data[i]) {
-			case 0:
-				//draw off screen
-				x = -69420;
-				break;
-			case 1:
-				x = x1;
-				break;
-			case 2:
-				x = x2;
-				break;
-			case 3:
-				x = x3;
-				break;
-			case 4:
-				x = x4;
-				break;
-			default:
-				break;
+			if (data[i] != 0) {
+				int x = 0;
+				switch (data[i]) {
+				case 0:
+					//draw off screen
+					x = -69420;
+					break;
+				case 1:
+					x = x1;
+					break;
+				case 2:
+					x = x2;
+					break;
+				case 3:
+					x = x3;
+					break;
+				case 4:
+					x = x4;
+					break;
+				default:
+					break;
+				}
+				g.fillOval(x, circleY[i], circleDia, circleDia);
 			}
-
-			g.fillOval(x, circleY[i], circleDia, circleDia);
 		}
 
 	}
@@ -172,44 +182,70 @@ public class Play extends BasicGameState {
 		for (int i = 0; i < circleY.length; i++) {
 			
 			circleY[i] += distance;
+			
+			
+			if(circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20) {
+				System.out.println("d"+score);
+				Input input = container.getInput();
+				boolean scorecheck = false;
+				if (input.isKeyDown(Input.KEY_A)) {
+					if (data[i] == 1)
+					{
+						scorecheck = true;
+						System.out.println("a" + score);
+						score++;
+						circleY[i]=1000000;
+						
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_W)) {
+					if (data[i] == 2)
+					{
+						scorecheck = true;
+						System.out.println("b"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_S)) {
+					if (data[i] == 3 )
+					{
+						scorecheck = true;
+						System.out.println("c"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+				else if (input.isKeyDown(Input.KEY_D)) {
+					if (data[i] == 4)
+					{
+						scorecheck = true;
+						System.out.println("d"+score);
+						score++;
+						circleY[i]=1000000;
+					}
+				}
+			}
 		}
-		
-		
-		if(container.getInput().isKeyDown(Input.KEY_Y)) { //change code
-			b1 = true;
-			t1 = 1000;
-		}	
+			
 		if(t1 > 0)	{
 			t1 -= delta;
 		} else {
 			b1 = false;
 		}
 		
-		
-		if(container.getInput().isKeyDown(Input.KEY_U)) { //change code
-			b2 = true;
-			t2 = 1000;
-		}
 		if(t2 > 0)	{
 			t2 -= delta;
 		} else {
 			b2 = false;
 		}
 		
-		if(container.getInput().isKeyDown(Input.KEY_I)) { //change code
-			b3 = true;
-			t3 = 1000;
-		}
 		if(t3 > 0)	{
 			t3 -= delta;
 		} else {
 			b3 = false;
 		}
 		
-		if(container.getInput().isKeyDown(Input.KEY_O)) { //change code
-			b4 = true;
-			t4 = 1000;
-		}
 		if(t4 > 0)	{
 			t4 -= delta;
 		} else {
@@ -224,7 +260,6 @@ public class Play extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return Game.play;
 	}
 
