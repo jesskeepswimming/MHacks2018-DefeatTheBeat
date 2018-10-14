@@ -1,6 +1,12 @@
 package states;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.newdawn.slick.GameContainer;
@@ -8,6 +14,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -15,6 +22,7 @@ import core.Game;
 
 public class Play extends BasicGameState {
 
+	private static final org.newdawn.slick.Font Verdana = null;
 	int[] data = { 1, 0, 1, 2, 4, 3, 0, 1, 0, 3, 2, 1, 0, 3, 1, 1, 2, 1, 2, 1, 0, 3, 0, 3, 1, 2 };
 	boolean start = false;
 	int deltaSum = 0;
@@ -26,7 +34,8 @@ public class Play extends BasicGameState {
 	int x3 = 994;
 	int x4 = 1259;
 	int iconSize = 222;
-	Image i1, i2, i3, i4;
+	Image i1, i2, i3, i4, back, tap;
+	String songname = "SONG NAME";
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -35,17 +44,35 @@ public class Play extends BasicGameState {
 		i2 = new Image("res/images/3spread-fingers.png");
 		i3 = new Image("res/images/4wave-left.png");
 		i4 = new Image("res/images/5wave-right.png");
+		tap = new Image("res/images/1double-tap.png");
+		back = new Image("res/images/back.png");
+	
+
+		
+		// make sure to derive the size
+		
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 
 		g.drawImage(bg, 0, 0, container.getWidth(), container.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
+		g.drawImage(back, 60, 90, 50+(back.getWidth()*1/9), 80+(back.getHeight()*1/9), 0, 0, back.getWidth(), back.getHeight());
+		g.drawImage(tap, 130, 60, 130+(tap.getWidth()*2/3), 60+(tap.getHeight()*2/3), 0, 0, tap.getWidth(), tap.getHeight());
+		
+
+		g.setFont(Game.title);
+		g.drawString("NOW PLAYING:", 1380, 120);
+		
+		g.setFont(Game.text);
+		g.drawString(songname, 1380, 190);
+
+		
 		g.drawImage(i1, x1, hitY, x1 + iconSize, hitY + iconSize, 0, 0, i1.getWidth(), i1.getHeight());
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-
+		
 		int length = data.length * iconSize;
 
 		for (int i = 0; i < data.length; i++) {
@@ -75,6 +102,11 @@ public class Play extends BasicGameState {
 			g.fillOval(x, y, iconSize, iconSize);
 		}
 
+	}
+
+	private Font Font(String string, int plain, int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
