@@ -26,7 +26,7 @@ public class Menu extends BasicGameState{
 		play = new Image("res/images/play.png");
 		background = new Image("res/images/background.png");
 		waves = new Image("res/images/bars2.png");
-		text = new Image("res/images/TEXT.png");
+		text = new Image("res/images/title.png");
 		tap = new Image("res/images/1double-tap.png");
 	}
 
@@ -34,13 +34,17 @@ public class Menu extends BasicGameState{
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 
-		g.drawImage(background, 0, 0, container.getWidth(), container.getHeight(), 0, 0);
-		g.drawImage(waves, 642, 330, 642+(waves.getWidth()*5/6),330+(waves.getHeight()*5/6), 0, 0, waves.getWidth(), waves.getHeight());
-		g.drawImage(play, 860, 650, 920, 720, 0, 0, play.getWidth(), play.getHeight());
-		g.drawImage(tap, 650, 600, 650+tap.getWidth(), 600+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
-		g.setFont(Game.heading);
-		int wid = Game.heading.getWidth("GESTURE JESTER");
-		g.drawString("GESTURE JESTER", container.getWidth()/2-wid/2, 120);
+		int mid = container.getWidth()/2;
+		g.drawImage(background, 0, 0, mid*2, container.getHeight(), 0, 0);
+		g.drawImage(text, mid-(text.getWidth()/2), 200, (mid-text.getWidth()/2)+text.getWidth(),200 + text.getHeight() , 0,0, text.getWidth(), text.getHeight());
+		g.drawImage(waves, mid-waves.getWidth()/2, 350, (mid-waves.getWidth()/2)+waves.getWidth(),350+(waves.getHeight()), 0, 0, waves.getWidth(), waves.getHeight());
+		g.drawImage(play, mid + 60, 700, mid+60+play.getWidth()*1/7, 700+play.getHeight()*1/7, 0, 0, play.getWidth(), play.getHeight());
+		g.drawImage(tap, mid-tap.getWidth()+10, 650, mid+10, 650+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
+		
+		// g.setFont(Game.heading);
+		//int wid = Game.heading.getWidth("DEFEAT THE BEAT");
+		//g.drawString("DEFEAT THE BEAT", container.getWidth()/2-wid/2, 120);
+		
 	}
 
 	@Override

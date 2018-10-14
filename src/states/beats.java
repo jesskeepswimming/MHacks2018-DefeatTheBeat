@@ -69,7 +69,7 @@ public class beats {
         int secpermove = 6;
         double movepersec = 1/(double)secpermove;
             // convert file to byte[]
-        byte[] bFile = recoverFromUrl(url);
+        byte[] bFile = readBytesFromFile("C:\\temp\\testing1.txt");
         beat[] graphData = getUnscaledAmplitude(bFile);
         Arrays.sort(graphData);
         

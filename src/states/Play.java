@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -38,6 +39,7 @@ public class Play extends BasicGameState {
 	int iconSize = 222;
 	int score = 0;
 	Image bg, i1, i2, i3, i4, back, tap;
+	Music main;
 	String songname = "SONG NAME";
 
 	@Override
@@ -49,6 +51,8 @@ public class Play extends BasicGameState {
 		i4 = new Image("res/images/5wave-right.png");
 		tap = new Image("res/images/1double-tap.png");
 		back = new Image("res/images/back.png");
+		
+		main = new Music("songs/sandstorm.ogg");
 
 		// make sure to derive the size
 		try {
@@ -58,6 +62,8 @@ public class Play extends BasicGameState {
 			e.printStackTrace();
 		}
 		generateMetaData();
+		
+		main.play();
 	}
 
 	// generates values needed to run game based of inputed beat map
@@ -172,7 +178,6 @@ public class Play extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return Game.play;
 	}
 

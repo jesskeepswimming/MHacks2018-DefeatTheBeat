@@ -40,7 +40,7 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		// fonts
-		Font javaFont = new Font("Montserrat Medium", Font.BOLD, 60);
+		Font javaFont = new Font("Montserrat Light Italic", Font.BOLD, 65);
 		heading = new TrueTypeFont(javaFont, true);
 
 		javaFont = new Font("Montserrat Light", Font.PLAIN, 50);
@@ -54,14 +54,8 @@ public class Game extends StateBasedGame {
 
 
 		this.getState(play).init(appgc, this);
-		if(debugMode)
-		{
-			this.enterState(play);
-		}
-		else
-		{
-			this.enterState(menu);
-		}
+		
+		this.enterState(menu);
 
 	}
 
@@ -69,7 +63,7 @@ public class Game extends StateBasedGame {
 
 		try {
 			appgc = new AppGameContainer(new Game(gameName + " " + version));
-			appgc.setDisplayMode(1920, 1080, true);
+			appgc.setDisplayMode(1920, 1080, false);
 			appgc.setDefaultFont(text);
 			appgc.setShowFPS(debugMode);
 			appgc.setTargetFrameRate(fps);
