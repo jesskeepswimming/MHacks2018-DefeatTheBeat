@@ -39,8 +39,8 @@ public class Menu extends BasicGameState{
 		g.drawImage(play, 860, 650, 920, 720, 0, 0, play.getWidth(), play.getHeight());
 		g.drawImage(tap, 650, 600, 650+tap.getWidth(), 600+tap.getHeight(), 0, 0, tap.getWidth(), tap.getHeight());
 		g.setFont(Game.heading);
-		int wid = Game.heading.getWidth("GESTURE JESTER");
-		g.drawString("GESTURE JESTER", container.getWidth()/2-wid/2, 120);
+		int wid = Game.heading.getWidth("DEFEAT THE BEAT");
+		g.drawString("DEFEAT THE BEAT", container.getWidth()/2-wid/2, 120);
 	}
 
 	@Override
