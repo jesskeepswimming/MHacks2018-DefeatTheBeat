@@ -53,7 +53,7 @@ public class Play extends BasicGameState {
 		// make sure to derive the size
 		try {
 			data = beats.getarray("http://ericamwang.com/videoplayback.aif");
-			System.out.println(Arrays.toString(data));
+			//System.out.println(Arrays.toString(data));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,10 +63,10 @@ public class Play extends BasicGameState {
 	// generates values needed to run game based of inputed beat map
 	public void generateMetaData() {
 		circleY = new int[data.length];
-
 		for (int i = 0; i < data.length; i++) {
 			circleY[i] = 0 - i * indexGap;
 		}
+		
 	}
 
 	@Override
@@ -88,7 +88,6 @@ public class Play extends BasicGameState {
 		g.drawImage(i2, x2, hitY, x2 + iconSize, hitY + iconSize, 0, 0, i2.getWidth(), i2.getHeight());
 		g.drawImage(i3, x3, hitY, x3 + iconSize, hitY + iconSize, 0, 0, i3.getWidth(), i3.getHeight());
 		g.drawImage(i4, x4, hitY, x4 + iconSize, hitY + iconSize, 0, 0, i4.getWidth(), i4.getHeight());
-
 		for (int i = 0; i < data.length; i++) {
 
 			int x = 0;
@@ -113,8 +112,39 @@ public class Play extends BasicGameState {
 			default:
 				break;
 			}
-
+			
 			g.fillOval(x, circleY[i], circleDia, circleDia);
+			Input input = container.getInput();
+			boolean scorecheck = false;
+			if (input.isKeyDown(Input.KEY_A)) {
+				if (data[i] == 1 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("a");
+				}
+			}
+			else if (input.isKeyDown(Input.KEY_W)) {
+				if (data[i] == 2 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("b");
+				}
+			}
+			else if (input.isKeyDown(Input.KEY_S)) {
+				if (data[i] == 3 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("c");
+				}
+			}
+			else if (input.isKeyDown(Input.KEY_D)) {
+				if (data[i] == 4 && (circleY[i]>=hitY-20 && circleY[i] <=hitY+iconSize+20))
+				{
+					scorecheck = true;
+					System.out.println("d");
+				}
+			}
+
 		}
 
 	}
