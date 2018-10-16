@@ -91,10 +91,10 @@ public class PickS extends BasicGameState{
 		
 		if (container.getInput().isKeyDown(Input.KEY_Z))
 		 {
-			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
+			//game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
 		}
 		
-		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ||container.getInput().isKeyDown(Input.KEY_Z)) {
 			game.enterState(Game.play, new FadeOutTransition(), new FadeInTransition());
 		}
 		

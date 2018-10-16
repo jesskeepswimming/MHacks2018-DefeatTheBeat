@@ -69,7 +69,7 @@ public class beats {
         double secpermove = 0.5;
         double movepersec = 1/(double)secpermove;
             // convert file to byte[]
-        byte[] bFile = readBytesFromFile(".\\songs\\" + songpath);
+        byte[] bFile = readBytesFromFile(songpath);
         beat[] graphData = getUnscaledAmplitude(bFile);
         Arrays.sort(graphData);
         

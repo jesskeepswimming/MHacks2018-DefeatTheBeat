@@ -1,5 +1,6 @@
 package states;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -123,7 +124,7 @@ public class Play extends BasicGameState {
 		g.setFont(Game.title);
 		g.drawString("NOW PLAYING:", 1380, 120);
 		g.setFont(Game.text);
-		g.drawString(songname, 1380, 190);
+		g.drawString(Game.song, 1380, 190);
 		g.drawString("Score: " + score, 1380, 260);
 		if (start) {
 			for (int i = startindex; i < data.length; i++) {
@@ -145,6 +146,7 @@ public class Play extends BasicGameState {
 					default:
 						break;
 					}
+					g.setColor(Color.white);
 					g.fillOval(x, circleY[i], circleDia, circleDia);
 				}
 			}
@@ -250,9 +252,9 @@ public class Play extends BasicGameState {
 			b4 = false;
 		}
 
-		if (input.isKeyDown(Input.KEY_Z)) {
+		/*if (input.isKeyDown(Container.a)) {
 			game.enterState(Game.menu, new FadeOutTransition(), new FadeInTransition());
-		} else if (input.isKeyDown(Input.KEY_D) && !bpress) {
+		} else*/ if (input.isKeyDown(Input.KEY_D) && !bpress) {
 			start();
 			bpress = true;
 		}
